@@ -1,13 +1,13 @@
-package com.exam.exam_portal_backend;
+package com.exam.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ExamPortalBackendApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ExamPortalBackendApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
