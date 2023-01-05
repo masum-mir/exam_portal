@@ -1,14 +1,24 @@
-package com.exam.model;
+package com.exam.app.model;
 
 import java.util.HashSet;
+<<<<<<< HEAD:exam_portal_backend/src/main/java/com/exam/model/User.java
 import java.util.List;
 import java.util.Set;
 
+=======
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
+>>>>>>> 05f8e26378f826fee8dbb018ce7835976012d8c1:exam_portal_backend/src/main/java/com/exam/app/model/User.java
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,8 +40,25 @@ public class User {
 	
 	
 	// user many roles;
+<<<<<<< HEAD:exam_portal_backend/src/main/java/com/exam/model/User.java
 	private Set<UserRole> userRoles = new HashSet<>();
 	
+=======
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "user")
+	@JsonIgnore
+	private Set<UserRole> userRoles = new HashSet<>();
+	
+	
+	
+	
+	
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
+	}
+	public void setUserRoles(Set<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+>>>>>>> 05f8e26378f826fee8dbb018ce7835976012d8c1:exam_portal_backend/src/main/java/com/exam/app/model/User.java
 	public String getProfile() {
 		return profile;
 	}
