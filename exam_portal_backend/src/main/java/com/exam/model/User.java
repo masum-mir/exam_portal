@@ -1,5 +1,9 @@
 package com.exam.model;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +28,9 @@ public class User {
 	private boolean enabled = true;
 	private String profile;
 	
+	
+	// user many roles;
+	private Set<UserRole> userRoles = new HashSet<>();
 	
 	public String getProfile() {
 		return profile;
