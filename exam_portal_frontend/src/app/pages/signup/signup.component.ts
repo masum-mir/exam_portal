@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls: ['./signup.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SignupComponent implements OnInit {
 
@@ -42,15 +44,21 @@ export class SignupComponent implements OnInit {
 
     // add user
 
-    this.userService.addUser(this.user).subscribe((data) => {
+    this.userService.addUser(this.user).subscribe(
+      (data: any) => {
       // success
-      // alert("success")
-    }, error => {
+      console.log(data);
+      Swal.fire(
+        'Success done!',
+        'User is is' + data.id,
+        'success'
+      )
+    }, (error) => {
       // error
       console.log(error);
       this._snakbar.open("something went wrong !", 'error', {
         duration: 2000,
-        panelClass:['green-snackbar', 'login-snackbar'],
+        panelClass:['custom-class'],
         verticalPosition: 'top',
         horizontalPosition: 'right',
         
