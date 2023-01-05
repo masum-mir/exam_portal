@@ -3,6 +3,7 @@ package com.exam.app.service.impl;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.exam.app.model.User;
@@ -13,7 +14,7 @@ import com.exam.app.service.UserService;
 
 @Service
 public class UserServiceImplement implements UserService {
-	
+
 	@Autowired
 	private UserRepository userRepository;
 	
