@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   }
   constructor(
     private _snakbar: MatSnackBar,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {
 
   }
@@ -49,65 +51,31 @@ export class LoginComponent implements OnInit {
     this.loginService.generatedToken(this.loginData).subscribe(
     (data:any) => {
       console.log(data)
+      //login
+      this.loginService.loginUser(data.token);
+
+      this.loginService.getCurrentUser().subscribe((user:any) => {
+     
+        this.loginService.setUser(user);
+        console.log("login user: ",user);
+
+        // redirect .>admin : admin-dashboard
+        // redirect .>normal : normal-dashboard
+
+        if(this.loginService.getUserRole() == 'admin') {
+          window.location.href='/admin';
+          // this.router.navigate(['admin']);
+        } else if(this.loginService.getUserRole() == 'normal') {
+          window.location.href='/user-dashboard';
+        } else{
+          this.loginService.logout();
+          // location.reload();
+        }
+      })
     }, (error) => {
       console.log("Error!!")
       console.log(error);
     })
-  }
-
-
-  // login user: set token in localstroage
-  public loginUser(token: string) {
-    localStorage.setItem("token",token);
-    return true;
-  }
-
-  // islogin: user is logged in or not
-
-  public isLoggedIn() {
-    let tokenStr = localStorage.getItem("token");
-    if(tokenStr == undefined || tokenStr == '' || tokenStr == null ) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  // logout: remove token from local storage
-  public logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    return true;
-  }
-
-  //get token
-  public getToken() {
-    return localStorage.getItem("token");
-  }
-
-  //set userdetail
-
-  public setUser(user:any) {
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-
-  // get user
-  public getUser() {
-    let userStr = localStorage.getItem("user");
-    if(userStr != null) {
-      return JSON.parse(userStr);
-    } else {
-      this.logout();
-      return null;
-    }
-  }
-
-  // get user role
-
-  public getUserRole() {
-
-    let user = this.getUser();
-    return user.authorities[0].authority;
   }
 
 
