@@ -1,5 +1,6 @@
 package com.exam.app.model;
 
+import java.util.Collection;
 import java.util.HashSet;
 <<<<<<< HEAD:exam_portal_backend/src/main/java/com/exam/model/User.java
 import java.util.List;
@@ -7,6 +8,9 @@ import java.util.Set;
 
 =======
 import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,7 +27,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements UserDetails{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,9 +51,6 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "user")
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
-	
-	
-	
 	
 	
 	public Set<UserRole> getUserRoles() {
@@ -128,7 +129,36 @@ public class User {
 	}
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	
+	
+	// authority admin or normal 
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		Set<Authority> set = new HashSet<>();
+		
+		this.userRoles.forEach(userRole -> {
+			set.add(new Authority(userRole.getRole().getRoleName()));
+		});
+		
+		return set;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 	
