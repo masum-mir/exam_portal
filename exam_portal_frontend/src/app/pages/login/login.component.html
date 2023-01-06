@@ -16,6 +16,7 @@
           type="text"
           placeholder="@UserName"
           required
+          name="username" [(ngModel)]="loginData.username"
         />
 
         <br />
@@ -30,6 +31,7 @@
           id="pwd"
           name="password"
           required
+          name="password" [(ngModel)]="loginData.password"
         />
         <!-- <a class="type-toggle" >
             <ion-icon class="show-option" [hidden]="showPassword" name="eye-off-outline"></ion-icon>

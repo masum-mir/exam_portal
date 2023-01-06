@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  loginData = {
+    username: '',
+    password: ''
+  }
 
   show_button = false;
   show_eye = false;
@@ -14,18 +23,6 @@ export class LoginComponent {
     this.show_button = !this.show_button;
     this.show_eye = !this.show_eye;
   }
-
-// var pwShown = 0;
-
-// document.getElementById("eye").addEventListener("click", function () {
-//   if (pwShown == 0) {
-//       pwShown = 1;
-//       show();
-//   } else {
-//       pwShown = 0;
-//       hide();
-//   }
-// }, false);
 
 
 }
