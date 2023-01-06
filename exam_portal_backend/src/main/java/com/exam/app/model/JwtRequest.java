@@ -2,25 +2,19 @@ package com.exam.app.model;
 
 public class JwtRequest {
 	
-	String name;
+	String username;
 	String password;
 	
 	public JwtRequest() {
 		
 	}
 
-	public JwtRequest(String name, String password) {
-		super();
-		this.name = name;
-		this.password = password;
+	public String getUsername() {
+		return username;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -30,7 +24,13 @@ public class JwtRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	public JwtRequest(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
 	
 
 }

@@ -1,5 +1,5 @@
 <div class="overlay">
-  <form>
+  <form (ngSubmit)="formSubmit()">
     <div class="con">
       <header class="head-form">
         <h2>Log In</h2>
@@ -31,7 +31,7 @@
           id="pwd"
           name="password"
           required
-          name="password" [(ngModel)]="loginData.password"
+          [(ngModel)]="loginData.password"
         />
         <!-- <a class="type-toggle" >
             <ion-icon class="show-option" [hidden]="showPassword" name="eye-off-outline"></ion-icon>

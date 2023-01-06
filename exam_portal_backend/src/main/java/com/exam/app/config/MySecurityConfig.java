@@ -96,7 +96,7 @@ public class MySecurityConfig {
 //		 return super.authenticationManagerBean();
 //	 }
 	
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	@Bean
 	  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http

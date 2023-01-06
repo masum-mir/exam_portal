@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,7 @@ import com.exam.app.service.impl.UserDetailsServiceImplement;
 
 
 @RestController
+@CrossOrigin("*")
 public class AuthenticateController {
 	
 	@Autowired
@@ -38,7 +40,7 @@ public class AuthenticateController {
 		
 		try {
 			
-			authenticate(jwtRequest.getName(), jwtRequest.getPassword());
+			authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
 			
 		} catch(UsernameNotFoundException e) {
 			e.printStackTrace();
@@ -48,7 +50,7 @@ public class AuthenticateController {
 		}
 // authenticate
 		
-		UserDetails userDetails = this.userDetailsServiceImplement.loadUserByUsername(jwtRequest.getName());
+		UserDetails userDetails = this.userDetailsServiceImplement.loadUserByUsername(jwtRequest.getUsername());
 		String token = this.jwtUtils.generateToken(userDetails);
 		return ResponseEntity.ok(new JwtResponse(token));
 		
